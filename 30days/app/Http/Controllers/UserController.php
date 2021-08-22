@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Models\User;
-
-
 
 class UserController extends Controller
 {
@@ -28,12 +28,12 @@ class UserController extends Controller
         return view('edit', compact('name', 'introduction'));
     }
 
-    public function update(Request $request)
+    public function update(UserRequest $request)
     {
-        $user = $request->all();
+        $inputs = $request->all();
 
-        User::where('id', Auth::id())->update(['name' => $user['name'], 'introduction' => $user['introduction']]);
+        User::where('id', Auth::id())->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction']]);
 
-        return redirect(route('show', Auth::id()));
+        return redirect(route('show', Auth::id()))->with('message', 'ユーザーを編集できました');
     }
 }

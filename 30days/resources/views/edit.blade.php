@@ -12,9 +12,10 @@
                         <div class="h1 mb-4">
                             ユーザー編集
                         </div>
+                        @include('common.errors')
                         <div class="form-group">
                             <div class="mb-4">
-                                <label for="name" class="h3">名前</label>
+                                <label for="name" class="h3">ユーザーネーム</label>
                                 <input id="name" type="text" class="form-control" name="name" value="{{ $name }}">
                             </div>
                             <div class="mb-4">
