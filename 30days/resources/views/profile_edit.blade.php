@@ -7,11 +7,12 @@
             <div class="card">
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('update') }}">
+                    <form method="POST" action="{{ route('profile_update') }}">
                         @csrf
                         <div class="h1 mb-4">
                             ユーザー編集
                         </div>
+                        {{-- エラーメッセージ --}}
                         @include('common.errors')
                         <div class="form-group">
                             <div class="mb-4">

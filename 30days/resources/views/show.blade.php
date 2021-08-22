@@ -3,6 +3,7 @@
 @section('content')
 <div class="container mt-5">
 
+    {{-- フラッシュメッセージ --}}
     @if(session('message'))
     <div class="alert alert-success">{{session('message')}}</div>
     @endif
@@ -38,7 +39,7 @@
                 </div>
             </div>
             <div class="mt-3 text-right">
-                <a class="btn btn-primary" href="/user/edit">編集</a>
+                <a class="btn btn-primary" href="{{ route('profile_edit') }}">編集</a>
             </div>
         </div>
         <div class="col-1"></div>
