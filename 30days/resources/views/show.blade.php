@@ -63,10 +63,10 @@
             <div class="h3 text-secondary mb-3">Challenge</div>
 
             <div class="h3 card p-3">
-                {{ $challenge_title }}
+                {{ $challenge[0]->title }}
             </div>
             <div class="mt-3 text-right mb-5">
-                <a class="btn btn-primary" href="{{ route('challenge_edit') }}">編集</a>
+                <a class="btn btn-primary" href="{{ route('challenge_edit', $challenge[0]->id) }}">編集</a>
             </div>
             <div class="h3 text-secondary">毎日の振り返り</div>
             <table class="table table-striped">

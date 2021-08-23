@@ -24,4 +24,22 @@ class ChallengeController extends Controller
 
         return redirect(route('show', Auth::id()))->with('message', 'Challengeを設定しました');
     }
+
+    public function edit(int $challenge_id)
+    {
+        $challenge = Challenge::where('id', $challenge_id)->get();
+
+        $challenge_title = $challenge[0]->title;
+        $start_day = $challenge[0]->start_day;
+
+        return view('challenges.edit', compact('challenge_id', 'challenge_title', 'start_day'));
+    }
+
+    public function update(ChallengeRequest $request)
+    {
+        $inputs = $request->all();
+        Challenge::where('id', $request->challenge_id)->update(['title' => $inputs['challenge_title']]);
+
+        return redirect(route('show', Auth::id()))->with('message', 'Challengeを編集しました');
+    }
 }

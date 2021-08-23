@@ -20,12 +20,10 @@ class UserController extends Controller
 
         $challenge = Challenge::where('user_id', Auth::id())->where('is_completed', 0)->get();
 
-
-        $challenge_title = $challenge[0]->title;
         $is_challenging = !empty($challenge);
 
 
-        return view('show', compact('name', 'introduction', 'challenge_title',  'is_challenging'));
+        return view('show', compact('name', 'introduction', 'challenge',  'is_challenging'));
     }
 
     public function edit()
