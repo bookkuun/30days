@@ -8,6 +8,8 @@
     <div class="alert alert-success">{{session('message')}}</div>
     @endif
 
+
+
     <div class="row">
         <div class="col-4">
 
@@ -44,15 +46,46 @@
         </div>
         <div class="col-1"></div>
         <div class="col-7">
-            <form action="">
-                <label for="challenge" class="h3 text-secondary">Challenge</label>
-                <input id="challenge" class="form-control mb-4" type="text" placeholder="挑戦を記入してください">
+            @if(!$is_challenging)
+            @include('common.errors')
+            <form action="{{ route('challenge_store') }}" method="POST">
+                @csrf
+                <label for="challenge_title" class="h3 text-secondary">Challenge</label>
+                <input type="text" id="challenge_title" name="challenge_title" class="form-control mb-4"
+                    placeholder="挑戦を記入してください">
                 <label for="startday" class="h3 text-secondary">Start Day</label>
-                <input type="date" class="form-control mb-4">
-                <div class="text-right">
+                <input type="date" id="start_day" name="start_day" class="form-control mb-4">
+                <div class="text-right mb-5">
                     <button type="submit" class="btn btn-primary">保存</button>
                 </div>
             </form>
+            @else
+            <div class="h3 text-secondary mb-3">Challenge</div>
+
+            <div class="h3 card p-3">
+                {{ $challenge[0]->title }}
+            </div>
+            <div class="mt-3 text-right mb-5">
+                <a class="btn btn-primary" href="{{ route('challenge_edit', $challenge[0]->id) }}">編集</a>
+            </div>
+            <div class="h3 text-secondary">毎日の振り返り</div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-2" scope="col">日数</th>
+                        <th class="col-10" scope="col">振り返り</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{-- 繰り返し処理 --}}
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>TEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXT</td>
+                    </tr>
+                    {{-- 繰り返し処理終わり --}}
+                </tbody>
+            </table>
+            @endif
         </div>
     </div>
 </div>
