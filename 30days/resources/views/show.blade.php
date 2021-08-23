@@ -8,6 +8,8 @@
     <div class="alert alert-success">{{session('message')}}</div>
     @endif
 
+
+
     <div class="row">
         <div class="col-4">
 
@@ -44,6 +46,7 @@
         </div>
         <div class="col-1"></div>
         <div class="col-7">
+            @include('common.errors')
             <form action="{{ route('challenge_store') }}" method="POST">
                 @csrf
                 <label for="challenge_title" class="h3 text-secondary">Challenge</label>

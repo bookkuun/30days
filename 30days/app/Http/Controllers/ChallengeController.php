@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChallengeRequest;
 use Illuminate\Http\Request;
 use App\Models\Challenge;
 use Illuminate\Support\Facades\Auth;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class ChallengeController extends Controller
 {
 
-    public function store(Request $request)
+    public function store(ChallengeRequest $request)
     {
         $challenge = new Challenge();
 
