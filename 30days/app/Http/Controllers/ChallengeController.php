@@ -18,8 +18,10 @@ class ChallengeController extends Controller
         $challenge->start_day =  $request->start_day;
         $challenge->end_day = date("Y-m-d", strtotime($request->start_day . "+29 day"));
         $challenge->user_id =  Auth::id();
+        $challenge->is_completed =  0;
 
         $challenge->save();
+
         return redirect(route('show', Auth::id()))->with('message', 'Challengeを設定しました');
     }
 }
