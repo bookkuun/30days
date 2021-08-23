@@ -44,11 +44,13 @@
         </div>
         <div class="col-1"></div>
         <div class="col-7">
-            <form action="">
-                <label for="challenge" class="h3 text-secondary">Challenge</label>
-                <input id="challenge" class="form-control mb-4" type="text" placeholder="挑戦を記入してください">
+            <form action="{{ route('challenge_store') }}" method="POST">
+                @csrf
+                <label for="challenge_title" class="h3 text-secondary">Challenge</label>
+                <input type="text" id="challenge_title" name="challenge_title" class="form-control mb-4"
+                    placeholder="挑戦を記入してください">
                 <label for="startday" class="h3 text-secondary">Start Day</label>
-                <input type="date" class="form-control mb-4">
+                <input type="date" id="start_day" name="start_day" class="form-control mb-4">
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">保存</button>
                 </div>
