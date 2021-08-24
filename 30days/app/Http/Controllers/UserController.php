@@ -12,27 +12,33 @@ use App\Models\Diary;
 
 class UserController extends Controller
 {
-    public function show()
+    public function index()
+    {
+        $users = User::all();
+        return view('index', compact('users'));
+    }
+
+    public function show($id)
     {
         // ユーザー情報
-        $user = Auth::user();
+        $user = User::find($id);
+
         $name = $user->name;
         $introduction = $user->introduction;
         // Challenge情報
-        $challenge = Challenge::where('user_id', Auth::id())->where('is_completed', 0)->get();
+        $challenge = Challenge::where('user_id', $id)->where('is_completed', 0)->get();
         $is_challenging = count($challenge);
 
 
         if (count($challenge) > 0) {
             $challenge_id = $challenge[0]->id;
             $challenge_title = $challenge[0]->title;
-
             $diaries = Diary::where('challenge_id', $challenge[0]->id)->get();
 
-            return view('show', compact('name', 'introduction', 'challenge_id', 'challenge_title',  'is_challenging', 'diaries'));
+            return view('show', compact('id', 'name', 'introduction', 'challenge_id', 'challenge_title',  'is_challenging', 'diaries'));
         }
 
-        return view('show', compact('name', 'introduction',  'is_challenging'));
+        return view('show', compact('id', 'name', 'introduction',  'is_challenging'));
     }
 
     public function edit()
