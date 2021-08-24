@@ -42,4 +42,10 @@ class ChallengeController extends Controller
 
         return redirect(route('show', Auth::id()))->with('message', 'Challengeを編集しました');
     }
+
+    public function destroy($challenge_id)
+    {
+        Challenge::where('id', $challenge_id)->delete();
+        return redirect(route('show', Auth::id()))->with('message', 'Challengeをやめました');
+    }
 }
