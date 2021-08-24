@@ -16,7 +16,7 @@ class CreateDiariesTable extends Migration
         Schema::create('diaries', function (Blueprint $table) {
             $table->id();
             $table->string('comment', 1000);
-            $table->date('comment_day');
+            $table->tinyInteger('comment_day');
             $table->unsignedBigInteger('challenge_id');
             $table->timestamps();
             $table->foreign('challenge_id')->references('id')->on('challenges');
