@@ -19,7 +19,6 @@
                                 <label for="diary_comment" class="h3">Diary</label>
                                 <textarea id="diary_comment" type="textarea" class="form-control" name="diary_comment"
                                     rows="5">{{ $diary_comment }}</textarea>
-
                             </div>
                         </div>
 

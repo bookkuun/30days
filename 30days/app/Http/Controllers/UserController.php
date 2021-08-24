@@ -21,14 +21,21 @@ class UserController extends Controller
         $introduction = $user->introduction;
 
 
-        // Challnge情報
+        // Challenge情報
         $challenge = Challenge::where('user_id', Auth::id())->where('is_completed', 0)->get();
         $is_challenging = count($challenge);
 
-        // Diary情報
-        $diaries = Diary::all();
 
-        return view('show', compact('name', 'introduction', 'challenge',  'is_challenging', 'diaries'));
+        if (count($challenge) > 0) {
+            $challenge_id = $challenge[0]->id;
+            $challenge_title = $challenge[0]->title;
+
+            $diaries = Diary::where('challenge_id', $challenge[0]->id)->get();
+
+            return view('show', compact('name', 'introduction', 'challenge_id', 'challenge_title',  'is_challenging', 'diaries'));
+        }
+
+        return view('show', compact('name', 'introduction',  'is_challenging'));
     }
 
     public function edit()

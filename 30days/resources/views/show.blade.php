@@ -50,18 +50,29 @@
             <div class="h3 text-secondary mb-3">Challenge</div>
 
             <div class="h3 card p-3">
-                {{ $challenge[0]->title }}
+                {{ $challenge_title }}
             </div>
             <div class="mt-3 text-right mb-5">
-                <a class="btn btn-primary" href="{{ route('challenge_edit', $challenge[0]->id) }}">編集</a>
+                <a class="btn btn-primary" href="{{ route('challenge_edit', $challenge_id) }}">編集</a>
             </div>
             @include('common.errors')
+            @if(session('danger'))
+            <div class="alert alert-danger">
+                <ul class="align-items-center mb-0">
+                    <li>{{session('danger')}}</li>
+                </ul>
+            </div>
+            @endif
             <form method="POST" action="{{ route('diary_store') }}">
+
                 @csrf
                 <div class="form-group">
                     <div class="mb-4">
-                        <input type="hidden" name="challenge_id" value="{{ $challenge[0]->id }}">
+                        <input type="hidden" name="challenge_id" value="{{ $challenge_id }}">
                         <label for="diary_comment" class="h3 text-secondary">1日の振り返り</label>
+                        <div class="text-secondary mb-3">
+                            ※振り返りは1日1回です
+                        </div>
                         <textarea id="diary_comment" type="textarea" class="form-control" name="diary_comment"
                             rows="5"></textarea>
                     </div>
