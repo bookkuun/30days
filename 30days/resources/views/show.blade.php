@@ -8,8 +8,6 @@
     <div class="alert alert-success">{{session('message')}}</div>
     @endif
 
-
-
     <div class="row">
         <div class="col-4">
 

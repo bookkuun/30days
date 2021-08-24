@@ -39,6 +39,9 @@
                             <button type="submit" class="btn btn-primary">
                                 保存
                             </button>
+                            <a class="btn btn-primary" href="{{ route('show', Auth::id()) }}">
+                                戻る
+                            </a>
                         </div>
                     </form>
                 </div>

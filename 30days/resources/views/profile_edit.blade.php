@@ -7,12 +7,23 @@
             <div class="card">
 
                 <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="h1 mb-4">
+                            Chalelnge編集
+                        </div>
+                        <div>
+                            <form action="{{ route('user_delete', Auth::id()) }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <input type="submit" value="退会" class="btn btn-danger"
+                                    onclick='return confirm("本当に退会しますか？");'>
+                            </form>
+                        </div>
+                    </div>
+
+                    {{-- エラーメッセージ --}}
                     <form method="POST" action="{{ route('profile_update') }}">
                         @csrf
-                        <div class="h1 mb-4">
-                            ユーザー編集
-                        </div>
-                        {{-- エラーメッセージ --}}
                         @include('common.errors')
                         <div class="form-group">
                             <div class="mb-4">
@@ -30,6 +41,9 @@
                             <button type="submit" class="btn btn-primary">
                                 保存
                             </button>
+                            <a class="btn btn-primary" href="{{ route('show', Auth::id()) }}">
+                                戻る
+                            </a>
                         </div>
                     </form>
                 </div>

@@ -14,13 +14,10 @@ class UserController extends Controller
 {
     public function show()
     {
-
         // ユーザー情報
         $user = Auth::user();
         $name = $user->name;
         $introduction = $user->introduction;
-
-
         // Challenge情報
         $challenge = Challenge::where('user_id', Auth::id())->where('is_completed', 0)->get();
         $is_challenging = count($challenge);
@@ -54,5 +51,13 @@ class UserController extends Controller
         User::where('id', Auth::id())->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction']]);
 
         return redirect(route('show', Auth::id()))->with('message', 'ユーザーを編集しました');
+    }
+
+    public function destroy($id)
+    {
+        if (Auth::check() && Auth::id() == $id) {
+            Auth::user()->delete();
+            return redirect()->route('register')->with('message', '退会処理が完了しました');
+        }
     }
 }
