@@ -46,7 +46,67 @@
         </div>
         <div class="col-1"></div>
         <div class="col-7">
-            @if(!$is_challenging)
+            @if($is_challenging)
+            <div class="h3 text-secondary mb-3">Challenge</div>
+
+            <div class="h3 card p-3">
+                {{ $challenge_title }}
+            </div>
+            <div class="mt-3 text-right mb-5">
+                <a class="btn btn-primary" href="{{ route('challenge_edit', $challenge_id) }}">編集</a>
+            </div>
+            @include('common.errors')
+            @if(session('danger'))
+            <div class="alert alert-danger">
+                <ul class="align-items-center mb-0">
+                    <li>{{session('danger')}}</li>
+                </ul>
+            </div>
+            @endif
+            <form method="POST" action="{{ route('diary_store') }}">
+
+                @csrf
+                <div class="form-group">
+                    <div class="mb-4">
+                        <input type="hidden" name="challenge_id" value="{{ $challenge_id }}">
+                        <label for="diary_comment" class="h3 text-secondary">1日の振り返り</label>
+                        <div class="text-secondary mb-3">
+                            ※振り返りは1日1回です
+                        </div>
+                        <textarea id="diary_comment" type="textarea" class="form-control" name="diary_comment"
+                            rows="5"></textarea>
+                    </div>
+                </div>
+                <div class="text-right mb-5">
+                    <button type="submit" class="btn btn-primary">
+                        保存
+                    </button>
+                </div>
+            </form>
+
+            <div class="h3 text-secondary">毎日の振り返り</div>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-2" scope="col">日数</th>
+                        <th class="col-8" scope="col">振り返り</th>
+                        <th class="col-2" scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{-- 繰り返し処理 --}}
+                    @foreach ($diaries as $diary)
+                    <tr>
+                        <th scope="row">{{ $diary->comment_day }} </th>
+                        <td>{{ $diary->comment }}</td>
+                        <td><a class="btn btn-primary" href="{{ route('diary_edit', $diary->id) }}">編集</a></td>
+                    </tr>
+                    @endforeach
+                    {{-- 繰り返し処理終わり --}}
+                </tbody>
+            </table>
+            @else
             @include('common.errors')
             <form action="{{ route('challenge_store') }}" method="POST">
                 @csrf
@@ -59,32 +119,6 @@
                     <button type="submit" class="btn btn-primary">保存</button>
                 </div>
             </form>
-            @else
-            <div class="h3 text-secondary mb-3">Challenge</div>
-
-            <div class="h3 card p-3">
-                {{ $challenge[0]->title }}
-            </div>
-            <div class="mt-3 text-right mb-5">
-                <a class="btn btn-primary" href="{{ route('challenge_edit', $challenge[0]->id) }}">編集</a>
-            </div>
-            <div class="h3 text-secondary">毎日の振り返り</div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th class="col-2" scope="col">日数</th>
-                        <th class="col-10" scope="col">振り返り</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{-- 繰り返し処理 --}}
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>TEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXT</td>
-                    </tr>
-                    {{-- 繰り返し処理終わり --}}
-                </tbody>
-            </table>
             @endif
         </div>
     </div>
