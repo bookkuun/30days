@@ -55,16 +55,15 @@
             <div class="mt-3 text-right mb-5">
                 <a class="btn btn-primary" href="{{ route('challenge_edit', $challenge[0]->id) }}">編集</a>
             </div>
-
+            @include('common.errors')
             <form method="POST" action="{{ route('diary_store') }}">
                 @csrf
-
-
                 <div class="form-group">
                     <div class="mb-4">
                         <input type="hidden" name="challenge_id" value="{{ $challenge[0]->id }}">
-                        <label for="diary" class="h3 text-secondary">1日の振り返り</label>
-                        <textarea id="diary" type="textarea" class="form-control" name="diary" rows="5"></textarea>
+                        <label for="diary_comment" class="h3 text-secondary">1日の振り返り</label>
+                        <textarea id="diary_comment" type="textarea" class="form-control" name="diary_comment"
+                            rows="5"></textarea>
                     </div>
                 </div>
                 <div class="text-right mb-5">
@@ -80,16 +79,17 @@
                 <thead>
                     <tr>
                         <th class="col-2" scope="col">日数</th>
-                        <th class="col-10" scope="col">振り返り</th>
+                        <th class="col-8" scope="col">振り返り</th>
+                        <th class="col-2" scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     {{-- 繰り返し処理 --}}
                     @foreach ($diaries as $diary)
-
                     <tr>
                         <th scope="row">{{ $diary->comment_day }} </th>
                         <td>{{ $diary->comment }}</td>
+                        <td><a class="btn btn-primary" href="{{ route('diary_edit', $diary->id) }}">編集</a></td>
                     </tr>
                     @endforeach
                     {{-- 繰り返し処理終わり --}}
