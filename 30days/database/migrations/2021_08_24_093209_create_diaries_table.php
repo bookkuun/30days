@@ -19,7 +19,7 @@ class CreateDiariesTable extends Migration
             $table->tinyInteger('comment_day');
             $table->unsignedBigInteger('challenge_id');
             $table->timestamps();
-            $table->foreign('challenge_id')->references('id')->on('challenges');
+            $table->foreign('challenge_id')->references('id')->on('challenges')->onDelete('cascade');
         });
     }
 

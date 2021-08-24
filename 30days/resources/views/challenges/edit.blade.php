@@ -7,11 +7,22 @@
             <div class="card">
 
                 <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="h1 mb-4">
+                            Chalelnge編集
+                        </div>
+                        <div>
+                            <form action="{{ route('challenge_delete', $challenge_id) }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-danger">
+                                    Challengeをやめる
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                     <form method="POST" action="{{ route('challenge_update', $challenge_id) }}">
                         @csrf
-                        <div class="h1 mb-4">
-                            Challegeの編集
-                        </div>
                         {{-- エラーメッセージ --}}
                         @include('common.errors')
                         <input type="hidden" name="challnege_id" value="{{ $challenge_id }}">
