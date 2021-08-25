@@ -50,8 +50,9 @@ class UserController extends Controller
         $user = Auth::user();
         $name = $user->name;
         $introduction = $user->introduction;
+        $profile_image = $user->profile_image;
 
-        return view('profile_edit', compact('name', 'introduction'));
+        return view('profile_edit', compact('name', 'introduction', 'profile_image'));
     }
 
     public function update(UserRequest $request)
@@ -63,12 +64,11 @@ class UserController extends Controller
         if ($request->hasFile('profile_image')) {
             $path = \Storage::put('/public', $profile_image);
             $path = explode('/', $path);
+            User::where('id', Auth::id())->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction'], 'profile_image' => $path[1]]);
         } else {
-            $path = null;
+            User::where('id', Auth::id())->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction']]);
         }
 
-
-        User::where('id', Auth::id())->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction'], 'profile_image' => $path[1]]);
         return redirect(route('show', Auth::id()))->with('message', 'ユーザーを編集しました');
     }
 
