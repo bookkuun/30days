@@ -25,6 +25,9 @@ class UserController extends Controller
 
         $name = $user->name;
         $introduction = $user->introduction;
+        $profile_image = $user->profile_image;
+
+
         // Challenge情報
         $challenge = Challenge::where('user_id', $id)->where('is_completed', 0)->get();
         $is_challenging = count($challenge);
@@ -35,7 +38,7 @@ class UserController extends Controller
             $challenge_title = $challenge[0]->title;
             $diaries = Diary::where('challenge_id', $challenge[0]->id)->get();
 
-            return view('show', compact('id', 'name', 'introduction', 'challenge_id', 'challenge_title',  'is_challenging', 'diaries'));
+            return view('show', compact('id', 'name', 'introduction', 'challenge_id', 'challenge_title',  'is_challenging', 'diaries', 'profile_image'));
         }
 
         return view('show', compact('id', 'name', 'introduction',  'is_challenging'));
@@ -54,8 +57,18 @@ class UserController extends Controller
     public function update(UserRequest $request)
     {
         $inputs = $request->all();
-        User::where('id', Auth::id())->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction']]);
 
+        $profile_image = $request->file('profile_image');
+
+        if ($request->hasFile('profile_image')) {
+            $path = \Storage::put('/public', $profile_image);
+            $path = explode('/', $path);
+        } else {
+            $path = null;
+        }
+
+
+        User::where('id', Auth::id())->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction'], 'profile_image' => $path[1]]);
         return redirect(route('show', Auth::id()))->with('message', 'ユーザーを編集しました');
     }
 
