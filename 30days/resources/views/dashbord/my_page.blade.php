@@ -5,10 +5,16 @@
 <div class="row">
     <div class="col-4">
         <div class="card" style="margin: 0 auto;" style="width: 18rem;">
+
+            @if(!empty($profile_image))
+            <img height="250" src="{{ '/storage/' . $profile_image }}" alt="">
+            @else
             <svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap">
                 <rect width="100%" height="100%" fill="#868e96" />
             </svg>
+            @endif
+
             <div class="card-body">
                 <h3 class="card-title">{{ $name }}</h3>
                 <h5 class="card-title">自己紹介</h5>

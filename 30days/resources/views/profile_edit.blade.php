@@ -22,7 +22,7 @@
                     </div>
 
                     {{-- エラーメッセージ --}}
-                    <form method="POST" action="{{ route('profile_update') }}">
+                    <form method="POST" action="{{ route('profile_update') }}" enctype="multipart/form-data">
                         @csrf
                         @include('common.errors')
                         <div class="form-group">
@@ -34,6 +34,11 @@
                                 <label for="introduction" class="h3">自己紹介</label>
                                 <textarea id="introduction" type="textarea" class="form-control"
                                     name="introduction">{{ $introduction }}</textarea>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="profile_image" class="h3">プロフィール画像</label>
+                                <input id="profile_image" type="file" class="form-control" name="profile_image">
                             </div>
                         </div>
 
