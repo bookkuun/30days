@@ -6,8 +6,8 @@
     <div class="col-4">
         <div class="card" style="margin: 0 auto;" style="width: 18rem;">
 
-            @if(!empty($profile_image))
-            <img height="250" src="{{ '/storage/' . $profile_image }}" alt="">
+            @if(!empty($user->profile_image))
+            <img height="250" src="{{ '/storage/' . $user->profile_image }}" alt="">
             @else
             <svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap">
@@ -16,9 +16,9 @@
             @endif
 
             <div class="card-body">
-                <h3 class="card-title">{{ $name }}</h3>
+                <h3 class="card-title">{{ $user->name }}</h3>
                 <h5 class="card-title">自己紹介</h5>
-                <p class="card-text">{{ $introduction }}</p>
+                <p class="card-text">{{ $user->introduction }}</p>
                 <table class="table text-center table-bordered">
                     <thead>
                         <tr>
@@ -44,10 +44,10 @@
         @if($is_challenging)
         <div class="h3 text-secondary mb-3">Challenge</div>
         <div class="h3 card p-3">
-            {{ $challenge_title }}
+            {{ $challenge->title }}
         </div>
         <div class="mt-3 text-right mb-5">
-            <a class="btn btn-primary" href="{{ route('challenge_edit', $challenge_id) }}">編集</a>
+            <a class="btn btn-primary" href="{{ route('challenge_edit', $challenge->id) }}">編集</a>
         </div>
         @include('common.errors')
         @if(session('danger'))
@@ -61,7 +61,7 @@
             @csrf
             <div class="form-group">
                 <div class="mb-4">
-                    <input type="hidden" name="challenge_id" value="{{ $challenge_id }}">
+                    <input type="hidden" name="challenge_id" value="{{ $challenge->id }}">
                     <label for="diary_comment" class="h3 text-secondary">1日の振り返り</label>
                     <div class="text-secondary mb-3">
                         ※振り返りは1日1回です

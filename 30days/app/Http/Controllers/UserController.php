@@ -23,25 +23,16 @@ class UserController extends Controller
         // ユーザー情報
         $user = User::find($id);
 
-        $name = $user->name;
-        $introduction = $user->introduction;
-        $profile_image = $user->profile_image;
-
-
         // Challenge情報
-        $challenge = Challenge::where('user_id', $id)->where('is_completed', 0)->get();
-        $is_challenging = count($challenge);
+        $challenge = Challenge::whereUserId($id)->whereIsCompleted(0)->first();
+        $is_challenging = !empty($challenge);
 
-
-        if (count($challenge) > 0) {
-            $challenge_id = $challenge[0]->id;
-            $challenge_title = $challenge[0]->title;
-            $diaries = Diary::where('challenge_id', $challenge[0]->id)->get();
-
-            return view('show', compact('id', 'name', 'introduction', 'challenge_id', 'challenge_title',  'is_challenging', 'diaries', 'profile_image'));
+        if ($is_challenging) {
+            $diaries = Diary::whereChallengeId($challenge->id)->get();
+            return view('show', compact('user', 'challenge', 'diaries', 'is_challenging'));
         }
 
-        return view('show', compact('id', 'name', 'introduction',  'is_challenging'));
+        return view('show', compact('user', 'is_challenging'));
     }
 
     public function edit()

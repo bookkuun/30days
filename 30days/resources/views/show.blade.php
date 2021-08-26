@@ -4,7 +4,7 @@
 <div class="container mt-5">
 
 
-    @if ($id == Auth::id() )
+    @if ($user->id == Auth::id() )
     @include('dashbord.my_page')
     @else
     @include('dashbord.other_page')
