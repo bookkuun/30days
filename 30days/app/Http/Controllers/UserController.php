@@ -19,19 +19,23 @@ class UserController extends Controller
 
     public function show($id)
     {
-        // ユーザー情報
+        // user
         $user = User::findOrFail($id);
 
-        // Challenge情報
+        // challenge
         $challenge = Challenge::whereUserId($id)->whereIsCompleted(0)->first();
         $is_challenging = !empty($challenge);
 
+        $challenge_count = count(Challenge::whereUserId($id)->where('is_completed', 0)->orWhere('is_completed', 1)->get());
+        $success_count = count(Challenge::whereUserId($id)->whereIsSuccessful(1)->get());
+
         if ($is_challenging) {
+            // diary
             $diaries = Diary::whereChallengeId($challenge->id)->get();
-            return view('show', compact('user', 'challenge', 'diaries', 'is_challenging'));
+            return view('show', compact('user', 'challenge', 'diaries', 'is_challenging', 'challenge_count', 'success_count'));
         }
 
-        return view('show', compact('user', 'is_challenging'));
+        return view('show', compact('user', 'is_challenging', 'challenge_count', 'success_count'));
     }
 
     public function edit()
@@ -54,7 +58,7 @@ class UserController extends Controller
             $user->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction']]);
         }
 
-        return redirect(route('show', $user->id))->with('message', 'ユーザーを編集しました');
+        return redirect(route('user_show', $user->id))->with('message', 'ユーザーを編集しました');
     }
 
     public function destroy($id)
@@ -63,6 +67,6 @@ class UserController extends Controller
             Auth::user()->delete();
             return redirect()->route('register')->with('message', '退会処理が完了しました');
         }
-        return redirect()->route('show', $id)->with('message', '退会処理が失敗しました');
+        return redirect()->route('user_show', $id)->with('message', '退会処理が失敗しました');
     }
 }
