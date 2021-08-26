@@ -71,6 +71,7 @@
         @include('common.errors')
         <form action="{{ route('challenge_store') }}" method="POST">
             @csrf
+            <input type="hidden" name="user_id" value="{{ Auth::id() }}">
             <label for="challenge_title" class="h3 text-secondary">Challenge</label>
             <input type="text" id="challenge_title" name="challenge_title" class="form-control mb-4"
                 placeholder="挑戦を記入してください">

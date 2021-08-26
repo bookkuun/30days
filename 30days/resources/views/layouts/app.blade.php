@@ -26,13 +26,13 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <a class="navbar-brand" href="{{ route('show',Auth::id()) }}">
+                    <a class="navbar-brand" href="{{ route('user_show',Auth::id()) }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item  pr-5">
-                            <a class="nav-link" href="{{ route('show',Auth::id()) }}">My Challenge</a>
+                            <a class="nav-link" href="{{ route('user_show',Auth::id()) }}">My Challenge</a>
                         </li>
                         <li class="nav-item pr-5">
                             <a class="nav-link" href="{{ route('user_index') }}">Others Challenge</a>
