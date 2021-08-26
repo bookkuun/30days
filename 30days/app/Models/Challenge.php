@@ -15,9 +15,5 @@ class Challenge extends Model
      *
      * @var array
      */
-    protected $fillable = [
-
-        'is_completed',
-        'is_successful',
-    ];
+    protected $fillable = [];
 }
