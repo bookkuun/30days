@@ -22,8 +22,8 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>0</td>
-                    <td>0</td>
+                    <td class="h5">{{ $challenge_count }}</td>
+                    <td class="h5">{{ $success_count }}</td>
                 </tr>
             </tbody>
         </table>

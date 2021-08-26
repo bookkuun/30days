@@ -26,13 +26,16 @@ class UserController extends Controller
         $challenge = Challenge::whereUserId($id)->whereIsCompleted(0)->first();
         $is_challenging = !empty($challenge);
 
+        $challenge_count = count(Challenge::whereUserId($id)->where('is_completed', 0)->orWhere('is_completed', 1)->get());
+        $success_count = count(Challenge::whereUserId($id)->whereIsSuccessful(1)->get());
+
         if ($is_challenging) {
             // diary
             $diaries = Diary::whereChallengeId($challenge->id)->get();
-            return view('show', compact('user', 'challenge', 'diaries', 'is_challenging'));
+            return view('show', compact('user', 'challenge', 'diaries', 'is_challenging', 'challenge_count', 'success_count'));
         }
 
-        return view('show', compact('user', 'is_challenging'));
+        return view('show', compact('user', 'is_challenging', 'challenge_count', 'success_count'));
     }
 
     public function edit()

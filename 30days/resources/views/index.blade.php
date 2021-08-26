@@ -16,7 +16,7 @@
                 </svg>
                 @endif
                 <div class="card-body">
-                    <h3 class="card-title"><a href="{{ route('show',$user->id) }}">{{ $user->name }}</a></h3>
+                    <h3 class="card-title"><a href="{{ route('user_show',$user->id) }}">{{ $user->name }}</a></h3>
                     <h5 class="card-title">自己紹介</h5>
                     <p class="card-text">{{ $user->introduction }}</p>
                 </div>
