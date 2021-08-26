@@ -19,14 +19,15 @@ class UserController extends Controller
 
     public function show($id)
     {
-        // ユーザー情報
+        // user
         $user = User::findOrFail($id);
 
-        // Challenge情報
+        // challenge
         $challenge = Challenge::whereUserId($id)->whereIsCompleted(0)->first();
         $is_challenging = !empty($challenge);
 
         if ($is_challenging) {
+            // diary
             $diaries = Diary::whereChallengeId($challenge->id)->get();
             return view('show', compact('user', 'challenge', 'diaries', 'is_challenging'));
         }

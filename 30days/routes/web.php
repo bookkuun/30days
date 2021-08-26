@@ -2,10 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Welcome
 Route::get('/', function () {
     return view('welcome');
 });
 
+// 新規登録・ログイン
 Auth::routes();
 
 // users
