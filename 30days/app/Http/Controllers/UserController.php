@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Models\Challenge;
@@ -14,14 +13,14 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::orderBy('created_at', 'desc')->get();
         return view('index', compact('users'));
     }
 
     public function show($id)
     {
         // ユーザー情報
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         // Challenge情報
         $challenge = Challenge::whereUserId($id)->whereIsCompleted(0)->first();
@@ -43,19 +42,19 @@ class UserController extends Controller
 
     public function update(UserRequest $request)
     {
-        $current_user_id = Auth::id();
+        $user = User::findOrFail(Auth::id());
         $inputs = $request->only(['name', 'introduction']);
         $profile_image = $request->file('profile_image');
 
-        if ($request->hasFile('profile_image')) {
+        if ($profile_image) {
             $path = \Storage::put('/public', $profile_image);
             $path = explode('/', $path);
-            User::whereId($current_user_id)->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction'], 'profile_image' => $path[1]]);
+            $user->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction'], 'profile_image' => $path[1]]);
         } else {
-            User::whereId($current_user_id)->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction']]);
+            $user->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction']]);
         }
 
-        return redirect(route('show', $current_user_id))->with('message', 'ユーザーを編集しました');
+        return redirect(route('show', $user->id))->with('message', 'ユーザーを編集しました');
     }
 
     public function destroy($id)
@@ -64,5 +63,6 @@ class UserController extends Controller
             Auth::user()->delete();
             return redirect()->route('register')->with('message', '退会処理が完了しました');
         }
+        return redirect()->route('show', $id)->with('message', '退会処理が失敗しました');
     }
 }
