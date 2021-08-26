@@ -7,7 +7,7 @@
             <div class="card">
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('diary_update', $diary_id) }}">
+                    <form method="POST" action="{{ route('diary_update', $diary->id) }}">
                         @csrf
                         <div class="h1 mb-4">
                             Diaryの編集
@@ -18,7 +18,7 @@
                             <div class="mb-4">
                                 <label for="diary_comment" class="h3">Diary</label>
                                 <textarea id="diary_comment" type="textarea" class="form-control" name="diary_comment"
-                                    rows="5">{{ $diary_comment }}</textarea>
+                                    rows="5">{{ $diary->comment }}</textarea>
                             </div>
                         </div>
 
@@ -26,6 +26,9 @@
                             <button type="submit" class="btn btn-primary">
                                 保存
                             </button>
+                            <a class="btn btn-primary" href="{{ route('show', Auth::id()) }}">
+                                戻る
+                            </a>
                         </div>
                     </form>
                 </div>
