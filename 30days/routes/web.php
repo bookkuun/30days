@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 // user
-Route::get('/users/index', [App\Http\Controllers\UserController::class, 'index'])->name('user_index');
+Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('user_index');
 Route::get('/users/{id}', [App\Http\Controllers\UserController::class, 'show'])->name('show');
 Route::get('/profile', [App\Http\Controllers\UserController::class, 'edit'])->name('profile_edit');
 Route::post('/profile', [App\Http\Controllers\UserController::class, 'update'])->name('profile_update');

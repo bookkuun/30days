@@ -12,7 +12,7 @@
                             Chalelnge編集
                         </div>
                         <div>
-                            <form action="{{ route('challenge_delete', $challenge_id) }}" method="POST">
+                            <form action="{{ route('challenge_delete', $challenge->id) }}" method="POST">
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit" class="btn btn-danger">
@@ -21,17 +21,17 @@
                             </form>
                         </div>
                     </div>
-                    <form method="POST" action="{{ route('challenge_update', $challenge_id) }}">
+                    <form method="POST" action="{{ route('challenge_update', $challenge->id) }}">
                         @csrf
                         {{-- エラーメッセージ --}}
                         @include('common.errors')
-                        <input type="hidden" name="challnege_id" value="{{ $challenge_id }}">
-                        <input type="hidden" name="start_day" value="{{ $start_day }}">
+                        <input type="hidden" name="challnege_id" value="{{ $challenge->id }}">
+                        <input type="hidden" name="start_day" value="{{ $challenge->start_day }}">
                         <div class="form-group">
                             <div class="mb-4">
                                 <label for="challenge_title" class="h3">Challenge</label>
                                 <input id="challenge_title" type="text" class="form-control" name="challenge_title"
-                                    value="{{ $challenge_title }}">
+                                    value="{{ $challenge->title }}">
                             </div>
                         </div>
 
