@@ -16,7 +16,7 @@ class ChallengeController extends Controller
         $challenge->title = $request->challenge_title;
         $challenge->start_day =  $request->start_day;
         $challenge->end_day = date("Y-m-d", strtotime($request->start_day . "+29 day"));
-        $challenge->user_id =  Auth::id();
+        $challenge->user_id =   $request->user_id;
         $challenge->is_completed =  0;
 
         $challenge->save();
@@ -26,7 +26,7 @@ class ChallengeController extends Controller
 
     public function edit(int $challenge_id)
     {
-        $challenge = Challenge::whereId($challenge_id)->first();
+        $challenge = Challenge::find($challenge_id);
 
         return view('challenges.edit', compact('challenge'));
     }
@@ -34,7 +34,7 @@ class ChallengeController extends Controller
     public function update(ChallengeRequest $request)
     {
         $inputs = $request->only(['challenge_title']);
-        Challenge::whereId($request->challenge_id)->update(['title' => $inputs['challenge_title']]);
+        Challenge::find($request->challenge_id)->update(['title' => $inputs['challenge_title']]);
 
         return redirect(route('user_show', Auth::id()))->with('message', 'Challengeを編集しました');
     }
@@ -42,7 +42,6 @@ class ChallengeController extends Controller
     public function destroy($challenge_id)
     {
         Challenge::whereId($challenge_id)->whereUserId(Auth::id())->delete();
-
 
         return redirect(route('user_show', Auth::id()))->with('message', 'Challengeをやめました');
     }
