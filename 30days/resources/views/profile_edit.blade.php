@@ -12,7 +12,7 @@
                             Chalelnge編集
                         </div>
                         <div>
-                            <form action="{{ route('user_delete', Auth::id()) }}" method="POST">
+                            <form action="{{ route('user_delete', $user->id)}}" method="POST">
                                 @method('DELETE')
                                 @csrf
                                 <input type="submit" value="退会" class="btn btn-danger"
@@ -28,12 +28,12 @@
                         <div class="form-group">
                             <div class="mb-4">
                                 <label for="name" class="h3">ユーザーネーム</label>
-                                <input id="name" type="text" class="form-control" name="name" value="{{ $name }}">
+                                <input id="name" type="text" class="form-control" name="name" value="{{ $user->name }}">
                             </div>
                             <div class="mb-4">
                                 <label for="introduction" class="h3">自己紹介</label>
                                 <textarea id="introduction" type="textarea" class="form-control"
-                                    name="introduction">{{ $introduction }}</textarea>
+                                    name="introduction">{{ $user->introduction }}</textarea>
                             </div>
 
                             <div class="mb-4">
@@ -46,7 +46,7 @@
                             <button type="submit" class="btn btn-primary">
                                 保存
                             </button>
-                            <a class="btn btn-primary" href="{{ route('show', Auth::id()) }}">
+                            <a class="btn btn-primary" href="{{ route('show', $user->id) }}">
                                 戻る
                             </a>
                         </div>

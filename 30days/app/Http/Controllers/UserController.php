@@ -37,30 +37,25 @@ class UserController extends Controller
 
     public function edit()
     {
-
         $user = Auth::user();
-        $name = $user->name;
-        $introduction = $user->introduction;
-        $profile_image = $user->profile_image;
-
-        return view('profile_edit', compact('name', 'introduction', 'profile_image'));
+        return view('profile_edit', compact('user'));
     }
 
     public function update(UserRequest $request)
     {
-        $inputs = $request->all();
-
+        $current_user_id = Auth::id();
+        $inputs = $request->only(['name', 'introduction']);
         $profile_image = $request->file('profile_image');
 
         if ($request->hasFile('profile_image')) {
             $path = \Storage::put('/public', $profile_image);
             $path = explode('/', $path);
-            User::where('id', Auth::id())->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction'], 'profile_image' => $path[1]]);
+            User::whereId($current_user_id)->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction'], 'profile_image' => $path[1]]);
         } else {
-            User::where('id', Auth::id())->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction']]);
+            User::whereId($current_user_id)->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction']]);
         }
 
-        return redirect(route('show', Auth::id()))->with('message', 'ユーザーを編集しました');
+        return redirect(route('show', $current_user_id))->with('message', 'ユーザーを編集しました');
     }
 
     public function destroy($id)
