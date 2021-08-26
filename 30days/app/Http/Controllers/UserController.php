@@ -54,7 +54,7 @@ class UserController extends Controller
             $user->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction']]);
         }
 
-        return redirect(route('show', $user->id))->with('message', 'ユーザーを編集しました');
+        return redirect(route('user_show', $user->id))->with('message', 'ユーザーを編集しました');
     }
 
     public function destroy($id)
@@ -63,6 +63,6 @@ class UserController extends Controller
             Auth::user()->delete();
             return redirect()->route('register')->with('message', '退会処理が完了しました');
         }
-        return redirect()->route('show', $id)->with('message', '退会処理が失敗しました');
+        return redirect()->route('user_show', $id)->with('message', '退会処理が失敗しました');
     }
 }

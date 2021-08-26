@@ -19,7 +19,7 @@ class DiaryController extends Controller
             ->first();
 
         if ($is_todayDiary) {
-            return redirect(route('show', Auth::id()))->with('danger', '今日の振り返りは終えています');
+            return redirect(route('user_show', Auth::id()))->with('danger', '今日の振り返りは終えています');
         }
 
         $diaries = Diary::where('challenge_id', $request->challenge_id)->get();
@@ -39,7 +39,7 @@ class DiaryController extends Controller
             $challenge->update(['is_completed' => 1, 'is_successful' => 1]);
         }
 
-        return redirect(route('show', Auth::id()))->with('message', '1日の振り返りを保存しました');
+        return redirect(route('user_show', Auth::id()))->with('message', '1日の振り返りを保存しました');
     }
 
     public function edit(int $diary_id)
@@ -54,6 +54,6 @@ class DiaryController extends Controller
         $diary = Diary::find($request->diary_id);
         $diary->update(['comment' => $inputs['diary_comment']]);
 
-        return redirect(route('show', Auth::id()))->with('message', $diary->comment_day . '日目の振り返りを編集しました');
+        return redirect(route('user_show', Auth::id()))->with('message', $diary->comment_day . '日目の振り返りを編集しました');
     }
 }

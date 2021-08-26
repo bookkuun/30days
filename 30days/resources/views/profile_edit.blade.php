@@ -46,7 +46,7 @@
                             <button type="submit" class="btn btn-primary">
                                 保存
                             </button>
-                            <a class="btn btn-primary" href="{{ route('show', $user->id) }}">
+                            <a class="btn btn-primary" href="{{ route('user_show', $user->id) }}">
                                 戻る
                             </a>
                         </div>
