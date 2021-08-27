@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
-use App\Models\Challenge;
-use App\Models\Diary;
 
 class UserController extends Controller
 {
@@ -26,9 +24,9 @@ class UserController extends Controller
         $is_challenging = $challenges->where('is_completed', 0)->first();
 
         // チャレンジ数
-        $challenge_count = count($challenges->whereIn('is_completed', [0, 1]));
+        $challenge_count = $user->challengeCount($challenges);
         // 成功数
-        $success_count = count($challenges->where('is_successful', 1));
+        $success_count = $user->successCount($challenges);
 
         if ($is_challenging) {
             // diary
@@ -47,7 +45,7 @@ class UserController extends Controller
 
     public function update(UserRequest $request)
     {
-        $user = User::find(Auth::id());
+        $user = Auth::user();
         $inputs = $request->only(['name', 'introduction']);
         $profile_image = $request->file('profile_image');
 

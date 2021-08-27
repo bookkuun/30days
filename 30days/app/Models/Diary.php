@@ -11,6 +11,8 @@ class Diary extends Model
 
     protected $fillable = [
         'comment',
+        'is_completed',
+        'is_successful',
     ];
 
     public function challenge()
