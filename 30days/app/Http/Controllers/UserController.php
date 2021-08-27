@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
-use App\Models\Challenge;
-use App\Models\Diary;
 
 class UserController extends Controller
 {
@@ -20,19 +18,20 @@ class UserController extends Controller
     public function show($id)
     {
         // user
-        $user = User::findOrFail($id);
+        $user = User::find($id);
 
-        // challenge
-        $challenge = Challenge::whereUserId($id)->whereIsCompleted(0)->first();
-        $is_challenging = !empty($challenge);
+        $challenges = $user->challenges;
+        $is_challenging = $challenges->where('is_completed', 0)->first();
 
-        $challenge_count = count(Challenge::whereUserId($id)->where('is_completed', 0)->orWhere('is_completed', 1)->get());
-        $success_count = count(Challenge::whereUserId($id)->whereIsSuccessful(1)->get());
+        // チャレンジ数
+        $challenge_count = $user->challengeCount($challenges);
+        // 成功数
+        $success_count = $user->successCount($challenges);
 
         if ($is_challenging) {
             // diary
-            $diaries = Diary::whereChallengeId($challenge->id)->get();
-            return view('show', compact('user', 'challenge', 'diaries', 'is_challenging', 'challenge_count', 'success_count'));
+            $diaries = $is_challenging->diaries;
+            return view('show', compact('user', 'diaries', 'is_challenging', 'challenge_count', 'success_count'));
         }
 
         return view('show', compact('user', 'is_challenging', 'challenge_count', 'success_count'));
@@ -46,7 +45,7 @@ class UserController extends Controller
 
     public function update(UserRequest $request)
     {
-        $user = User::findOrFail(Auth::id());
+        $user = Auth::user();
         $inputs = $request->only(['name', 'introduction']);
         $profile_image = $request->file('profile_image');
 
@@ -58,7 +57,7 @@ class UserController extends Controller
             $user->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction']]);
         }
 
-        return redirect(route('user_show', $user->id))->with('message', 'ユーザーを編集しました');
+        return redirect(route('user_show', Auth::id()))->with('message', 'ユーザーを編集しました');
     }
 
     public function destroy($id)
@@ -67,6 +66,6 @@ class UserController extends Controller
             Auth::user()->delete();
             return redirect()->route('register')->with('message', '退会処理が完了しました');
         }
-        return redirect()->route('user_show', $id)->with('message', '退会処理が失敗しました');
+        return redirect()->route('user_show', Auth::id())->with('message', '退会処理が失敗しました');
     }
 }

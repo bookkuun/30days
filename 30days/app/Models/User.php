@@ -43,4 +43,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function challenges()
+    {
+        return $this->hasMany('App\Models\Challenge');
+    }
+
+    public function challengeCount($challenges)
+    {
+        return count($challenges->whereIn('is_completed', [0, 1]));
+    }
+
+    public function successCount($challenges)
+    {
+        return count($challenges->where('is_successful', 1));
+    }
 }

@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\DiaryRequest;
-use App\Models\Diary;
 use App\Models\Challenge;
+use App\Models\Diary;
 
 class DiaryController extends Controller
 {
 
     public function store(DiaryRequest $request)
     {
+
+        $challenge = Challenge::find($request->challenge_id);
 
         $is_todayDiary = Diary::where('challenge_id', $request->challenge_id)
             ->whereBetween('created_at', [date("Y/m/d H:i:s", strtotime('today')), date("Y/m/d H:i:s", strtotime('tomorrow'))])
@@ -22,21 +24,22 @@ class DiaryController extends Controller
             return redirect(route('user_show', Auth::id()))->with('danger', '今日の振り返りは終えています');
         }
 
-        $diaries = Diary::where('challenge_id', $request->challenge_id)->get();
+        $diaries = $challenge->diaries;
 
         $diary = new Diary();
         $diary->comment = $request->diary_comment;
         $diary->challenge_id =  $request->challenge_id;
         $diary->comment_day =  count($diaries) + 1;
-
         $diary->save();
 
         // 投稿の数を数える
+        $diaries = Challenge::find($request->challenge_id)->diaries;
         $diary_count = count($diaries);
 
         if ($diary_count === 30) {
-            $challenge = Challenge::where('is_completed', 0)->first();
-            $challenge->update(['is_completed' => 1, 'is_successful' => 1]);
+            $challenge->is_completed = 1;
+            $challenge->is_successful = 1;
+            $challenge->save();
         }
 
         return redirect(route('user_show', Auth::id()))->with('message', '1日の振り返りを保存しました');
