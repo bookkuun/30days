@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ChallengeRequest;
 use Illuminate\Http\Request;
-use App\Models\Challenge;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ChallengeRequest;
+use App\Models\Challenge;
 
 class ChallengeController extends Controller
 {

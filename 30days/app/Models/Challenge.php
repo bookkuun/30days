@@ -18,4 +18,14 @@ class Challenge extends Model
     protected $fillable = [
         'title',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function diaries()
+    {
+        return $this->hasMany('App\Models\Diary');
+    }
 }

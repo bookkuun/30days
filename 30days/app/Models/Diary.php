@@ -11,5 +11,12 @@ class Diary extends Model
 
     protected $fillable = [
         'comment',
+        'is_completed',
+        'is_successful',
     ];
+
+    public function challenge()
+    {
+        return $this->belongsTo('App\Models\Challenge');
+    }
 }
