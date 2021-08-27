@@ -7,7 +7,7 @@
         @if($is_challenging)
         <div class="h3 text-secondary mb-3">Challenge</div>
         <div class="h3 card p-3 mb-5">
-            {{ $challenge->title }}
+            {{ $is_challenging->title }}
         </div>
         <div class="h3 text-secondary">毎日の振り返り</div>
         <table class="table table-striped">

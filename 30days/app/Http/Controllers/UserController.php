@@ -19,7 +19,11 @@ class UserController extends Controller
     {
         // user
         $user = User::find($id);
+        if (is_null($user)) {
+            $this->show404();
+        }
 
+        // challenge
         $challenges = $user->challenges;
         $is_challenging = $challenges->where('is_completed', 0)->first();
 
@@ -52,9 +56,13 @@ class UserController extends Controller
         if ($profile_image) {
             $path = \Storage::put('/public', $profile_image);
             $path = explode('/', $path);
-            $user->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction'], 'profile_image' => $path[1]]);
+            $result = $user->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction'], 'profile_image' => $path[1]]);
         } else {
-            $user->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction']]);
+            $result = $user->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction']]);
+        }
+
+        if (!$result) {
+            // updateすることができなかった
         }
 
         return redirect(route('user_show', Auth::id()))->with('message', 'ユーザーを編集しました');

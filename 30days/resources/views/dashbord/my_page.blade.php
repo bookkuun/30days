@@ -57,6 +57,7 @@
             </thead>
             <tbody>
                 {{-- 繰り返し処理 --}}
+
                 @foreach ($diaries as $diary)
                 <tr>
                     <th scope="row">{{ $diary->comment_day }} </th>
@@ -64,6 +65,7 @@
                     <td><a class="btn btn-primary" href="{{ route('diary_edit', $diary->id) }}">編集</a></td>
                 </tr>
                 @endforeach
+
                 {{-- 繰り返し処理終わり --}}
             </tbody>
         </table>

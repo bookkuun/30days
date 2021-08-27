@@ -48,6 +48,10 @@ class DiaryController extends Controller
     public function edit(int $diary_id)
     {
         $diary = Diary::find($diary_id);
+        if (is_null($diary)) {
+            $this->show404();
+        }
+
         return view('diaries.edit', compact('diary'));
     }
 
