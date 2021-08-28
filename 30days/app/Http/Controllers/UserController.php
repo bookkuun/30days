@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use Mockery\Matcher\Not;
+use App\Exceptions\NotFoundException;
+
 
 class UserController extends Controller
 {
@@ -20,7 +23,7 @@ class UserController extends Controller
         // user
         $user = User::find($id);
         if (is_null($user)) {
-            $this->show404();
+            throw new NotFoundException();
         }
 
         // challenge
@@ -44,6 +47,7 @@ class UserController extends Controller
     public function edit()
     {
         $user = Auth::user();
+
         return view('profile_edit', compact('user'));
     }
 
@@ -62,7 +66,7 @@ class UserController extends Controller
         }
 
         if (!$result) {
-            // updateすることができなかった
+            abort(500);
         }
 
         return redirect(route('user_show', Auth::id()))->with('message', 'ユーザーを編集しました');

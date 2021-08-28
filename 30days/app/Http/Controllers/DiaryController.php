@@ -49,7 +49,7 @@ class DiaryController extends Controller
     {
         $diary = Diary::find($diary_id);
         if (is_null($diary)) {
-            $this->show404();
+            throw new NotFoundException();
         }
 
         return view('diaries.edit', compact('diary'));
