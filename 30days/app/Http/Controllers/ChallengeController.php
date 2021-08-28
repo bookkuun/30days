@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ChallengeRequest;
 use App\Models\Challenge;
+use Faker\Provider\Base;
+use App\Exceptions\NotFoundException;
+
 
 class ChallengeController extends Controller
 {
-
     public function store(ChallengeRequest $request)
     {
         $challenge = new Challenge();
@@ -26,7 +28,11 @@ class ChallengeController extends Controller
 
     public function edit(int $challenge_id)
     {
-        $challenge = Challenge::find($challenge_id);
+        $user = Auth::user();
+        $challenge = $user->challenges->find($challenge_id);
+        if (is_null($challenge)) {
+            throw new NotFoundException();
+        }
 
         return view('challenges.edit', compact('challenge'));
     }
