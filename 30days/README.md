@@ -1,64 +1,33 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# 30days
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Video Demo
 
-## About Laravel
+-   URL HERE
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Technologies used
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   HTML
+-   CSS
+-   BootStrap
+-   Laravel
+-   Mysql
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# Description
 
-## Learning Laravel
+このプロジェクトは、挑戦する 30 日間を共有する Web ページです。このプロジェクトを通して、Laravel フレームワークやデータベースに関する知識を広げたいと思いました。
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+このプロジェクトの対象者は、新しいことに挑戦したい人や挑戦を継続したい人です。一歩を踏み出せない人、挑戦がなかなか継続できない人に、挑戦するきっかけと仲間を作る環境を提供します。その方法として、30 日間継続したいことを掲げ、毎日の振り返りします。途中、挑戦をやめたくなった時は、他のユーザーの挑戦を見ることができます。挑戦しているのが自分だけではないことが分かれば、自分ももう少し頑張ってみようと思うことができます。
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+まず、ヘッダーにある新規登録画面に移動し、登録をしてください。登録後はダッシュボード画面に移動します。ダッシュボード画面では、30 日間の挑戦を設定することができます。挑戦を設定すると１日の振り返りを登録することができるようになります。また、誤った入力をした場合は編集画面から内容を修正することもできます。他の人の挑戦を見たい時はヘッダーにある Other Challenge リンクから他の人の挑戦を見ることができます。
 
-## Laravel Sponsors
+## ルーティング
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+個人のダッシュボードを起点として、プロフィールの変更、挑戦の設定、挑戦に対する振り返りをすることができます。
 
-### Premium Partners
+## バリデーション
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+それぞれの入力フォームで必須や文字の制限を行うなどのバリデーションを組んでいます。
 
-## Contributing
+## データベース
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+テーブルは users テーブル、challenges テーブル、diaries テーブル の３つがあります。users テーブルと challenges テーブル は一対多の関係です。challenges テーブルと diaries テーブルも一対多の関係です。
