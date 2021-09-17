@@ -12,7 +12,7 @@
                             Chalelnge編集
                         </div>
                         <div>
-                            <form action="{{ route('user_delete', $user->id)}}" method="POST">
+                            <form action="{{ route('users.destroy', $user->id)}}" method="POST">
                                 @method('DELETE')
                                 @csrf
                                 <input type="submit" value="退会" class="btn btn-danger"
@@ -46,7 +46,7 @@
                             <button type="submit" class="btn btn-primary">
                                 保存
                             </button>
-                            <a class="btn btn-primary" href="{{ route('user_show', $user->id) }}">
+                            <a class="btn btn-primary" href="{{ route('users.show', $user->id) }}">
                                 戻る
                             </a>
                         </div>

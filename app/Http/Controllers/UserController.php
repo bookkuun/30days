@@ -69,7 +69,7 @@ class UserController extends Controller
             abort(500);
         }
 
-        return redirect(route('user_show', Auth::id()))->with('message', 'ユーザーを編集しました');
+        return redirect(route('users.show', Auth::id()))->with('message', 'ユーザーを編集しました');
     }
 
     public function destroy($id)
@@ -78,6 +78,6 @@ class UserController extends Controller
             Auth::user()->delete();
             return redirect()->route('register')->with('message', '退会処理が完了しました');
         }
-        return redirect()->route('user_show', Auth::id())->with('message', '退会処理が失敗しました');
+        return redirect()->route('users.show', Auth::id())->with('message', '退会処理が失敗しました');
     }
 }
