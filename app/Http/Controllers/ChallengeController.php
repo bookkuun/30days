@@ -40,7 +40,7 @@ class ChallengeController extends Controller
     public function update(ChallengeRequest $request)
     {
         $inputs = $request->only(['challenge_title']);
-        Challenge::find($request->challenge_id)->update(['title' => $inputs['challenge_title']]);
+        Challenge::find($request->challenge)->update(['title' => $inputs['challenge_title']]);
 
         return redirect(route('user_show', Auth::id()))->with('message', 'Challengeを編集しました');
     }

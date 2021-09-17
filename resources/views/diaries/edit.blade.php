@@ -7,7 +7,8 @@
             <div class="card">
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('diary_update', $diary->id) }}">
+                    <form method="POST" action="{{ route('diaries.update', $diary->id) }}">
+                        @method('PUT')
                         @csrf
                         <div class="h1 mb-4">
                             Diaryの編集

@@ -58,7 +58,7 @@ class DiaryController extends Controller
     public function update(DiaryRequest $request)
     {
         $inputs = $request->only(['diary_comment']);
-        $diary = Diary::find($request->diary_id);
+        $diary = Diary::find($request->diary);
         $diary->update(['comment' => $inputs['diary_comment']]);
 
         return redirect(route('user_show', Auth::id()))->with('message', $diary->comment_day . '日目の振り返りを編集しました');

@@ -17,7 +17,7 @@
             {{ $is_challenging->title }}
         </div>
         <div class="mt-3 text-right mb-5">
-            <a class="btn btn-primary" href="{{ route('challenge_edit', $is_challenging->id) }}">編集</a>
+            <a class="btn btn-primary" href="{{ route('challenges.edit', $is_challenging->id) }}">編集</a>
         </div>
         @include('common.errors')
         @if(session('danger'))
@@ -27,7 +27,7 @@
             </ul>
         </div>
         @endif
-        <form method="POST" action="{{ route('diary_store') }}">
+        <form method="POST" action="{{ route('diaries.store') }}">
             @csrf
             <div class="form-group">
                 <div class="mb-4">
@@ -62,7 +62,7 @@
                 <tr>
                     <th scope="row">{{ $diary->comment_day }} </th>
                     <td>{{ $diary->comment }}</td>
-                    <td><a class="btn btn-primary" href="{{ route('diary_edit', $diary->id) }}">編集</a></td>
+                    <td><a class="btn btn-primary" href="{{ route('diaries.edit', $diary->id) }}">編集</a></td>
                 </tr>
                 @endforeach
 
@@ -71,7 +71,7 @@
         </table>
         @else
         @include('common.errors')
-        <form action="{{ route('challenge_store') }}" method="POST">
+        <form action="{{ route('challenges.store') }}" method="POST">
             @csrf
             <input type="hidden" name="user_id" value="{{ Auth::id() }}">
             <label for="challenge_title" class="h3 text-secondary">Challenge</label>
