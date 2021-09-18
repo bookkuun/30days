@@ -11,14 +11,6 @@
                         <div class="h1 mb-4">
                             Chalelnge編集
                         </div>
-                        <div>
-                            <form action="{{ route('users.destroy', $user->id)}}" method="POST">
-                                @method('DELETE')
-                                @csrf
-                                <input type="submit" value="退会" class="btn btn-danger"
-                                    onclick='return confirm("本当に退会しますか？");'>
-                            </form>
-                        </div>
                     </div>
 
                     {{-- エラーメッセージ --}}

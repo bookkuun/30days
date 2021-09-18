@@ -26,28 +26,25 @@ class UserController extends Controller
             throw new NotFoundException();
         }
 
-        // challenge
         $challenges = $user->challenges;
-        $is_challenging = $challenges->where('is_completed', 0)->first();
-
+        // 現在の挑戦
+        $current_challenge = $user->currentChallenge($challenges);
         // チャレンジ数
-        $challenge_count = $user->challengeCount($challenges);
+        $challenge_count = $user->countChallenges($challenges);
         // 成功数
-        $success_count = $user->successCount($challenges);
+        $success_count = $user->countSuccess($challenges);
 
-        if ($is_challenging) {
-            // diary
-            $diaries = $is_challenging->diaries;
-            return view('show', compact('user', 'diaries', 'is_challenging', 'challenge_count', 'success_count'));
+        if (isset($current_challenge)) {
+            $diaries = $current_challenge->diaries;
+            return view('show', compact('user', 'current_challenge', 'challenge_count', 'success_count', 'diaries',));
         }
 
-        return view('show', compact('user', 'is_challenging', 'challenge_count', 'success_count'));
+        return view('show', compact('user', 'current_challenge', 'challenge_count', 'success_count'));
     }
 
     public function edit()
     {
         $user = Auth::user();
-
         return view('profile_edit', compact('user'));
     }
 
@@ -60,24 +57,11 @@ class UserController extends Controller
         if ($profile_image) {
             $path = \Storage::put('/public', $profile_image);
             $path = explode('/', $path);
-            $result = $user->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction'], 'profile_image' => $path[1]]);
+            $user->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction'], 'profile_image' => $path[1]]);
         } else {
-            $result = $user->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction']]);
-        }
-
-        if (!$result) {
-            abort(500);
+            $user->update(['name' => $inputs['name'], 'introduction' => $inputs['introduction']]);
         }
 
         return redirect(route('users.show', Auth::id()))->with('message', 'ユーザーを編集しました');
-    }
-
-    public function destroy($id)
-    {
-        if (Auth::check() && Auth::id() == $id) {
-            Auth::user()->delete();
-            return redirect()->route('register')->with('message', '退会処理が完了しました');
-        }
-        return redirect()->route('users.show', Auth::id())->with('message', '退会処理が失敗しました');
     }
 }
