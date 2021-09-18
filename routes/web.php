@@ -11,14 +11,19 @@ Route::get('/', function () {
 Auth::routes();
 
 // users
-Route::resource('users', App\Http\Controllers\UserController::class)->middleware('auth')->only(['index', 'show', 'destroy']);
+Route::resource('users', App\Http\Controllers\UserController::class)
+    ->middleware('auth')->only(['index', 'show']);
 
 // profile
-Route::get('/profile', [App\Http\Controllers\UserController::class, 'edit'])->name('profile_edit');
-Route::post('/profile', [App\Http\Controllers\UserController::class, 'update'])->name('profile_update');
+Route::get('/profile', [App\Http\Controllers\UserController::class, 'edit'])
+    ->middleware('auth')->name('profile.edit');
+Route::post('/profile', [App\Http\Controllers\UserController::class, 'update'])
+    ->middleware('auth')->name('profile.update');
 
 // challenges
-Route::resource('challenges', App\Http\Controllers\ChallengeController::class)->middleware('auth')->only(['store', 'edit', 'update', 'destroy']);
+Route::resource('challenges', App\Http\Controllers\ChallengeController::class)
+    ->middleware('auth')->only(['store', 'edit', 'update', 'destroy']);
 
 // diaries
-Route::resource('diaries', App\Http\Controllers\DiaryController::class)->middleware('auth')->only(['store', 'edit', 'update']);
+Route::resource('diaries', App\Http\Controllers\DiaryController::class)
+    ->middleware('auth')->only(['store', 'edit', 'update']);

@@ -6,7 +6,7 @@
     <div class="col-4">
         @include('dashbord.profile_card')
         <div class="mt-3 text-right">
-            <a class="btn btn-primary" href="{{ route('profile_edit') }}">編集</a>
+            <a class="btn btn-primary" href="{{ route('profile.edit') }}">編集</a>
         </div>
     </div>
     <div class="col-1"></div>
