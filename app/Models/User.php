@@ -49,13 +49,18 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Challenge');
     }
 
-    public function challengeCount($challenges)
+    public function countChallenges($challenges): int
     {
         return count($challenges->whereIn('is_completed', [0, 1]));
     }
 
-    public function successCount($challenges)
+    public function countSuccess($challenges): int
     {
         return count($challenges->where('is_successful', 1));
+    }
+
+    public function currentChallenge($challenges)
+    {
+        return $challenges->where('is_completed', 0)->first();
     }
 }

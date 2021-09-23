@@ -6,18 +6,18 @@
     <div class="col-4">
         @include('dashbord.profile_card')
         <div class="mt-3 text-right">
-            <a class="btn btn-primary" href="{{ route('profile_edit') }}">編集</a>
+            <a class="btn btn-primary" href="{{ route('profile.edit') }}">編集</a>
         </div>
     </div>
     <div class="col-1"></div>
     <div class="col-7">
-        @if($is_challenging)
+        @if(isset($current_challenge))
         <div class="h3 text-secondary mb-3">Challenge</div>
         <div class="h3 card p-3">
-            {{ $is_challenging->title }}
+            {{ $current_challenge->title }}
         </div>
         <div class="mt-3 text-right mb-5">
-            <a class="btn btn-primary" href="{{ route('challenge_edit', $is_challenging->id) }}">編集</a>
+            <a class="btn btn-primary" href="{{ route('challenges.edit', $current_challenge->id) }}">編集</a>
         </div>
         @include('common.errors')
         @if(session('danger'))
@@ -27,11 +27,11 @@
             </ul>
         </div>
         @endif
-        <form method="POST" action="{{ route('diary_store') }}">
+        <form method="POST" action="{{ route('diaries.store') }}">
             @csrf
             <div class="form-group">
                 <div class="mb-4">
-                    <input type="hidden" name="challenge_id" value="{{ $is_challenging->id }}">
+                    <input type="hidden" name="challenge_id" value="{{ $current_challenge->id }}">
                     <label for="diary_comment" class="h3 text-secondary">1日の振り返り</label>
                     <div class="text-secondary mb-3">
                         ※振り返りは1日1回です
@@ -62,7 +62,7 @@
                 <tr>
                     <th scope="row">{{ $diary->comment_day }} </th>
                     <td>{{ $diary->comment }}</td>
-                    <td><a class="btn btn-primary" href="{{ route('diary_edit', $diary->id) }}">編集</a></td>
+                    <td><a class="btn btn-primary" href="{{ route('diaries.edit', $diary->id) }}">編集</a></td>
                 </tr>
                 @endforeach
 
@@ -71,7 +71,7 @@
         </table>
         @else
         @include('common.errors')
-        <form action="{{ route('challenge_store') }}" method="POST">
+        <form action="{{ route('challenges.store') }}" method="POST">
             @csrf
             <input type="hidden" name="user_id" value="{{ Auth::id() }}">
             <label for="challenge_title" class="h3 text-secondary">Challenge</label>
