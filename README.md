@@ -1,6 +1,6 @@
-# CS50 Final Project
+# 米ハーバード大学 　 CS50 　 Final Project
 
-認定証
+履修認定証
 [![Image from Gyazo](https://i.gyazo.com/9f1352300cab372f7bef42721017d815.png)](https://gyazo.com/9f1352300cab372f7bef42721017d815)
 
 URL:
@@ -10,42 +10,42 @@ https://courses.edx.org/certificates/9300d62ffb014e82acda037b6c87a4a7
 
 [![Image from Gyazo](https://i.gyazo.com/28d16baa8f4766830907e98287c6b830.png)](https://gyazo.com/28d16baa8f4766830907e98287c6b830)
 
-### プロジェクト憲章
+## プロジェクト憲章
 
-#### プロジェクトネーム
+### プロジェクトネーム
 
 -   30days
 
-#### 1 行でわかるプロジェクトのタイトル
+### 1 行でわかるプロジェクトのタイトル
 
 -   「挑戦する３０日を共有する」
 
-#### 誰のために作るのか (Who)
+### 誰のために作るのか (Who)
 
 -   新しいことに挑戦したい人
 -   挑戦を継続したい人
 
-#### どのような価値を提供するために作るのか (Why)
+### どのような価値を提供するために作るのか (Why)
 
 -   一歩を踏み出せない人、挑戦がなかなか継続できない人に、挑戦するきっかけと仲間を作る環境を提供する。
 
-#### どんなものを作るのか (What)
+### どんなものを作るのか (What)
 
 -   ３０日継続したいことを掲げ、毎日の感想を共有する。
 
-#### どのようなプロジェクト(サービス)なのか
+### どのようなプロジェクト(サービス)なのか
 
 -   新しいことに挑戦したい人がそれぞれ目標を掲げ、３０日間の完走を目指すサービス
 
-### 説明
+## 説明
 
 このプロジェクトの対象者は、新しいことに挑戦したい人や挑戦を継続したい人です。一歩を踏み出せない人、挑戦がなかなか継続できない人に、挑戦するきっかけと仲間を作る環境を提供します。その方法として、30 日間継続したいことを掲げ、毎日の振り返りします。途中、挑戦をやめたくなった時は、他のユーザーの挑戦を見ることができます。挑戦しているのが自分だけではないことが分かれば、自分ももう少し頑張ってみようと思うことができます。
 
-### 制作背景
+## 制作背景
 
 私は 10 代の時は新しいことに挑戦したり、それを継続することに対してそこまで難しいと感じたことはありませんでした。しかし、それらは社会人になると、思っている以上に難しいことなんだなと理解するようになりました。なぜかな？と考えたときにもちろん、体力の違いの問題もあると思います。しかし、それ以上に誰かに声をかけてもらったり、応援される機会が大幅に減ったことが原因ではないかなと考えました（10 代の時は常に同級生のような似たような年齢の人が近くにいるという想定）。そこで、チェレンジを共有しお互いの頑張りを認め合える環境があれば、チャレンジをスタート、継続しやすいのではないかと考え 30days を制作しました。30 日にした理由は 1 ヶ月と区切りがいいことと期間を定めること重要だと考えたからです。
 
-### 使用技術
+## 使用技術
 
 -   HTML
 -   CSS
@@ -54,7 +54,7 @@ https://courses.edx.org/certificates/9300d62ffb014e82acda037b6c87a4a7
 -   Laravel 8.61.0
 -   MySQL 8.0.27
 
-### インタフェース設計
+## インタフェース設計
 
 [![Image from Gyazo](https://i.gyazo.com/4f7b5ec761d1d5580750778514687251.png)](https://gyazo.com/4f7b5ec761d1d5580750778514687251)
 
@@ -63,13 +63,13 @@ https://courses.edx.org/certificates/9300d62ffb014e82acda037b6c87a4a7
 URL:
 https://xd.adobe.com/view/7dffbb61-3c21-4200-8b57-4d99585a8d77-28ac/screen/81fb7bfb-0450-4d40-9d3b-02276367508d
 
-### ER 図
+## ER 図
 
 [![Image from Gyazo](https://i.gyazo.com/50db99c64e4bdd0addbe937b19627716.png)](https://gyazo.com/50db99c64e4bdd0addbe937b19627716)
 
-### 機能一覧
+## 機能一覧
 
-| TH  | 主な機能             |
+|     | 主な機能             |
 | --- | -------------------- |
 | 1   | アカウント登録機能   |
 | 2   | 認証機能             |
@@ -79,7 +79,7 @@ https://xd.adobe.com/view/7dffbb61-3c21-4200-8b57-4d99585a8d77-28ac/screen/81fb7
 | 6   | ユーザー一覧機能     |
 | 7   | ユーザー詳細機能     |
 
-### 下記は Final Project 提出時の README
+## 下記は Final Project 提出時の README
 
 ### Technologies used
 
@@ -104,27 +104,3 @@ The target audience for this project is people who want to try new things and ke
 まず、ヘッダーにある新規登録画面に移動し、登録をしてください。登録後はダッシュボード画面に移動します。ダッシュボード画面では、30 日間の挑戦を設定することができます。挑戦を設定すると１日の振り返りを登録することができるようになります。誤った入力をした場合は編集画面に移動し内容を修正することができます。また、他の人の挑戦を見たい時はヘッダーにある Other Challenge リンクから他の人の挑戦を見ることができます。
 
 First, go to the New Registration screen in the header and register. After registering, you will be taken to the dashboard screen. In the dashboard screen, you can set up a 30-day challenge. Once you set the challenge, you will be able to register a daily recap. If you make a mistake, you can go to the edit screen to correct the content. Also, if you want to see other people's challenges, you can click the Other Challenge link in the header to see other people's challenges.
-
-### ルーティング
-
-個人のダッシュボードを起点として、プロフィールの変更、挑戦の設定、挑戦に対する振り返りの画面に遷移する設定をしています。
-
-Starting from your personal dashboard, you can change your profile, set up challenges, and reflect on your challenges.
-
-### バリデーション
-
-それぞれの入力フォームで必須や文字の制限を行うなどのバリデーションの設定をしています。
-
-Each input form has its own validation settings such as required and character restrictions.
-
-### コントローラー
-
-フォームから送られてきたデータの登録・更新や遷移するページを選択する設定をしています。
-
-The settings are used to register and update data sent from the form and to select the page to transition to.
-
-### データベース
-
-テーブルは users テーブル、challenges テーブル、diaries テーブル の３つがあります。users テーブルと challenges テーブル は一対多の関係です。challenges テーブルと diaries テーブルも一対多の関係です。
-
-There are three tables: users table, challenges table, and diaries table. users table has a one-to-many relationship with challenges table. challenges table has a one-to-many relationship with diaries table.
