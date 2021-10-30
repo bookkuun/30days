@@ -79,7 +79,7 @@ https://xd.adobe.com/view/7dffbb61-3c21-4200-8b57-4d99585a8d77-28ac/screen/81fb7
 | 6   | ユーザー一覧機能     |
 | 7   | ユーザー詳細機能     |
 
-## 下記は Final Project 提出時の README
+## 下記は Final Project 提出時の README です
 
 ### Technologies used
 
